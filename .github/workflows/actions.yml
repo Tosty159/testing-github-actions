@@ -1,4 +1,4 @@
-name: Build and Release code
+name: Build and Release Dode
 
 on:
   push:
@@ -9,12 +9,85 @@ jobs:
   build-linux:
     runs-on: ubuntu-latest
 
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Compile Code
+        run: gcc src/main.c -o main
+
+      - name: Package Release
+        run: |
+          mkdir -p package
+          cp main scripts/code.sh README.md package/
+          tar -czvf code-linux.tar.gz -C package .
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-linux
+          path: code-linux.tar.gz
+
   build-macos:
     runs-on: macos-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Compile Code
+        run: gcc src/main.c -o main
+
+      - name: Package Release
+        run: |
+          mkdir -p package
+          cp main scripts/code.sh README.md package/
+          tar -czvf code-macos.tar.gz -C package .
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-macos
+          path: code-macos.tar.gz
 
   build-windows:
     runs-on: windows-latest
 
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Compile Code
+        run: gcc src/main.c -o main.exe
+
+      - name: Package Release
+        run: |
+          mkdir package
+          Copy-Item -Path main.exe -Destination release\
+          Copy-Item -Path scripts/code.bat -Destination release\
+          Copy-Item -Path README.md -Destination release\
+          Compress-Archive -Path release -DestinationPath code-windows.zip
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-windows
+          path: code-windows.zi[]
+
   release:
     needs: [build-linux, build-macos, build-windows]
     runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Make release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/**/*
+          tag_name: ${{ github.ref_name }}
+          name: "Automated release for version ${{ github.ref_name }}"
+          token: ${{ secrets.MY_GITHUB_TOKEN }}
