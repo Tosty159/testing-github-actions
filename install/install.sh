@@ -32,14 +32,18 @@ tar -xzvf /tmp/code.tar.gz -C /tmp
 # Variables for paths
 EXECUTABLE="/tmp/code"
 WRAPPER_SCRIPT="/temp/code.sh"
-INSTALL_DIR="usr/local/bin"
+INSTALL_DIR="usr/local/bin/code"
 
+# Make directory
+sudo mkdir -p $INSTALL_DIR
+
+# Install executable and wrapper script
 echo "Installing executable..."
-cp "$EXECUTABLE" "$INSTALL_DIR/code"
+cp "$EXECUTABLE" "$INSTALL_DIR"
 chmod +x "$INSTALL_DIR/code"
 
 echo "Installing wrapper script..."
-cp "$WRAPPER_SCRIPT" "$INSTALL_DIR/code.sh"
+cp "$WRAPPER_SCRIPT" "$INSTALL_DIR"
 chmod +x "$INSTALL_DIR/code.sh"
 
 # Clean up
