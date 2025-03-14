@@ -14,12 +14,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Compile Code
-        run: gcc src/main.c -o main
+        run: gcc src/main.c -o run_c
 
       - name: Package Release
         run: |
           mkdir -p package
-          cp main scripts/code.sh README.md package/
+          cp run_c scripts/run_c.sh README.md package/
           tar -czvf code-linux.tar.gz -C package .
 
       - name: Upload Artifacts
@@ -36,12 +36,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Compile Code
-        run: gcc src/main.c -o main
+        run: gcc src/main.c -o run_c
 
       - name: Package Release
         run: |
           mkdir -p package
-          cp main scripts/code.sh README.md package/
+          cp run_c scripts/run_c.sh README.md package/
           tar -czvf code-macos.tar.gz -C package .
 
       - name: Upload Artifacts
@@ -58,13 +58,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Compile Code
-        run: gcc src/main.c -o main.exe
+        run: gcc src/main.c -o run_c.exe
 
       - name: Package Release
         run: |
           mkdir package
-          Copy-Item -Path main.exe -Destination package\
-          Copy-Item -Path scripts/code.bat -Destination package\
+          Copy-Item -Path run_c.exe -Destination package\
+          Copy-Item -Path scripts/run_c.bat -Destination package\
           Copy-Item -Path README.md -Destination package\
           Compress-Archive -Path package -DestinationPath code-windows.zip
 

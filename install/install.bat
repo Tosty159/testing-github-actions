@@ -46,27 +46,27 @@ if "%OS%"=="Windows" (
 )
 
 :: Variables for paths
-set "EXECUTABLE=%TEMP%\code.exe"
-set "WRAPPER_SCRIPT=%TEMP%\code.bat"
-set "INSTALL_DIR=%ProgramFiles%\code"
+set "EXECUTABLE=%TEMP%\run_c.exe"
+set "WRAPPER_SCRIPT=%TEMP%\run_c.bat"
+set "INSTALL_DIR=%ProgramFiles%\run_c"
 
 :: Make directory
 if not exist "%INSTALL_DIR%" mkdir "%INSTALL_DIR%"
 
 :: Install executable and wrapper script
 echo Installing executable...
-copy /Y "%EXECUTABLE%" "%INSTALL_DIR%\code.exe"
+copy /Y "%EXECUTABLE%" "%INSTALL_DIR%\run_c.exe"
 
 echo Installing wrapper script...
-copy /Y "%WRAPPER_SCRIPT%" "%INSTALL_DIR%\code.bat"
+copy /Y "%WRAPPER_SCRIPT%" "%INSTALL_DIR%\run_c.bat"
 
 :: Ensure the script is executable
-icacls "%INSTALL_DIR%\code.exe" /grant Everyone:RX
-icacls "%INSTALL_DIR%\code.bat" /grant Everyone:RX
+icacls "%INSTALL_DIR%\run_c.exe" /grant Everyone:RX
+icacls "%INSTALL_DIR%\run_c.bat" /grant Everyone:RX
 
 :: Clean up
 echo Cleaning up...
-del "%TEMP%\code.zip"
+del "%TEMP%\run_c.zip"
 
 echo Installation complete. You can now run the program using 'code' from the terminal.
 endlocal

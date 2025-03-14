@@ -30,9 +30,9 @@ echo "Extracting the release..."
 tar -xzvf /tmp/code.tar.gz -C /tmp
 
 # Variables for paths
-EXECUTABLE="/tmp/code"
-WRAPPER_SCRIPT="/temp/code.sh"
-INSTALL_DIR="usr/local/bin/code"
+EXECUTABLE="/tmp/run_c"
+WRAPPER_SCRIPT="/temp/run_c.sh"
+INSTALL_DIR="usr/local/bin/run_c"
 
 # Make directory
 sudo mkdir -p $INSTALL_DIR
@@ -40,11 +40,11 @@ sudo mkdir -p $INSTALL_DIR
 # Install executable and wrapper script
 echo "Installing executable..."
 cp "$EXECUTABLE" "$INSTALL_DIR"
-chmod +x "$INSTALL_DIR/code"
+chmod +x "$INSTALL_DIR/run_c"
 
 echo "Installing wrapper script..."
 cp "$WRAPPER_SCRIPT" "$INSTALL_DIR"
-chmod +x "$INSTALL_DIR/code.sh"
+chmod +x "$INSTALL_DIR/run_c.sh"
 
 # Clean up
 rm -rf /tmp/code*
