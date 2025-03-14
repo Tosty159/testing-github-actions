@@ -89,5 +89,6 @@ jobs:
         with:
           files: artifacts/**/*
           tag_name: ${{ github.ref_name }}
-          name: "Automated release for version ${{ github.ref_name }}"
+          name: "${{ github.ref_name }}"
+          
           token: ${{ secrets.MY_GITHUB_TOKEN }}
