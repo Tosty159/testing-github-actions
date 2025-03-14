@@ -63,10 +63,10 @@ jobs:
       - name: Package Release
         run: |
           mkdir package
-          Copy-Item -Path main.exe -Destination release\
-          Copy-Item -Path scripts/code.bat -Destination release\
-          Copy-Item -Path README.md -Destination release\
-          Compress-Archive -Path release -DestinationPath code-windows.zip
+          Copy-Item -Path main.exe -Destination package\
+          Copy-Item -Path scripts/code.bat -Destination package\
+          Copy-Item -Path README.md -Destination package\
+          Compress-Archive -Path package -DestinationPath code-windows.zip
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
