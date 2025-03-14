@@ -1,0 +1,20 @@
+name: Build and Release code
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+
+  build-macos:
+    runs-on: macos-latest
+
+  build-windows:
+    runs-on: windows-latest
+
+  release:
+    needs: [build-linux, build-macos, build-windows]
+    runs-on: ubuntu-latest
